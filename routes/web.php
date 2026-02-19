@@ -10,6 +10,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
 Route::get('/tables/{table}/print', [TableController::class, 'print'])
     ->name('tables.print');
 
@@ -20,3 +21,18 @@ Route::post('/order/type', [OrderStartController::class, 'setType'])->name('orde
 Route::get('/cart',[CartController::class,'index']);
 Route::post('/cart/add',[CartController::class,'add']);
 Route::post('/checkout',[CartController::class,'checkout']);
+
+Route::get('/menu/{category}', function ($category) {
+
+    $menus = ['food', 'drinks', 'snack'];
+    if (!in_array($category, $menus)) {
+        abort(404);
+    }
+
+    return view('menu', [
+        'category' => $category,
+        'type'     => request('type'),  
+        'table'    => request('table')
+    ]);
+});
+
