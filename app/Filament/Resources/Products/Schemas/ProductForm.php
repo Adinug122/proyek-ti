@@ -4,6 +4,7 @@ namespace App\Filament\Resources\Products\Schemas;
 
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
 
@@ -15,7 +16,7 @@ class ProductForm
             ->components([
                 TextInput::make('name_product')
                     ->required(),
-                TextInput::make('description')
+                Textarea::make('description')
                     ->required(),
                 TextInput::make('price')
                     ->required()

@@ -61,8 +61,8 @@ class TablesTable
         $tableNumber = $record->number;
 
         
-        $url = route('order.start', ['table' => $tableNumber]);
-
+     $url = route('order.start') . '?type=dine-in&table=' . $tableNumber;
+     
         $fileName = 'qr/meja-' . $record->number . '.png';
 
         $renderer = new ImageRenderer(

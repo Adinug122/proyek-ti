@@ -21,17 +21,18 @@ class Order extends Model
 
      public function items()
     {
-        return $this->hasMany(OrderItem::class);
+        return $this->hasMany(OrderItem::class, 'order_id');
     }
 
      public function table()
     {
-        return $this->belongsTo(Table::class);
+        return $this->belongsTo(Table::class, 'tables_id');
     }
 
     public function payment()
     {
         return $this->hasOne(Payment::class);
     }
+    
 
 }

@@ -2,20 +2,29 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    public function index(Request $request){
-    //      if(!session()->has('order_customer')){
-    //     return redirect('/start-order?table='.$request->table);
-    // }
+public function index(Request $request)
+{
+    $category = $request->query('category', 'food');
+    $products = Product::whereHas('category', function($query) use ($category) {
+        $query->where('name_category', 'like', '%' . $category . '%');
+    })->get();
 
-    $products = Product::paginate(10);
+    return view('menu', [
+        'products' => $products,
+        'category' => $category,
+        'type'     => $request->type, // Dikirim sebagai 'type'
+        'table'    => $request->table, // Dikirim sebagai 'table'
+        // 'request' => $request, // Atau kirim utuh object request-nya
+    ]);
+}  
 
-    return view('menu.index',compact('products'));
-    }
+    
 
     public function setType(Request $request)
 {

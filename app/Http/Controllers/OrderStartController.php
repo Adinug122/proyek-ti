@@ -6,19 +6,15 @@ use Illuminate\Http\Request;
 
 class OrderStartController extends Controller
 {
-     public function index(Request $request)
-{
-    // hanya set kalau datang dari QR
-    if ($request->filled('table')) {
-        session(['table_id' => $request->table]);
-    }
-
-    // ambil dari session
-    $tableId = session('table_id');
-
-    return view('order.start', compact('tableId'));
+  // OrderStartController.php
+public function index(Request $request) {
+    // Ambil type dan table dari QR Code (URL)
+    $type = $request->query('type'); 
+    $table = $request->query('table');
+    
+    // Kirim ke view start-order
+    return view('welcome', compact('type', 'table'));
 }
-
 
    public function setType(Request $request)
 {
@@ -39,7 +35,7 @@ class OrderStartController extends Controller
         session()->forget('table_id');
     }
 
-    return redirect()->route('product.index');
+    return redirect()->route('menu.index');
 }
 
 }

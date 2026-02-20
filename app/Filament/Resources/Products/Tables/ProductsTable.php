@@ -18,7 +18,8 @@
                     TextColumn::make('name_product')
                         ->searchable(),
                     TextColumn::make('description')
-                        ->searchable(),
+                        ->searchable()
+                        ->limit(10),
                     TextColumn::make('price')
                         ->prefix('Rp ')
                         ->sortable(),

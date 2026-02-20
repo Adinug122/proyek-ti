@@ -47,4 +47,9 @@ class OrderResource extends Resource
             'edit' => EditOrder::route('/{record}/edit'),
         ];
     }
+    
 }
+
+
+
+
