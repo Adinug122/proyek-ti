@@ -33,3 +33,9 @@ Route::get('/order', function (Illuminate\Http\Request $request) {
         'table' => $request->table
     ]);
 });
+
+// routes/web.php
+Route::get('/order/{id}/print', function ($id) {
+    $order = \App\Models\Order::with('items')->findOrFail($id);
+    return view('order.print', compact('order'));
+})->name('order.print');
